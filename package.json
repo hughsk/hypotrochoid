@@ -1,0 +1,27 @@
+{
+  "name": "hypotrochoid",
+  "version": "0.0.1",
+  "description": "Returns points across one or more hypotrochoids",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/.bin/beefy --browserify node_modules/.bin/browserify demo.js:bundle.js",
+    "prepublish": "node_modules/.bin/browserify demo.js -o bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hughsk/hypotrochoid.git"
+  },
+  "keywords": [
+    "geometry",
+    "spirograph",
+    "curve"
+  ],
+  "author": "Hugh Kennedy <hughskennedy@gmail.com> (http://hughskennedy.com/)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "beefy": "~0.3.0",
+    "browserify": "~2.13.3",
+    "raf": "0.0.2"
+  }
+}
