@@ -28,7 +28,7 @@ var options = {
   , 'Radius #5': radii[4]
   , 'Radius #6': radii[5]
   , 'Size': 30 + Math.random() * 60
-  , 'Undulate': false
+  , 'Undulate': true
 }
 
 gui.add(options, 'Size', 0, 200)
