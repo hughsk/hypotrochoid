@@ -105,48 +105,45 @@ var canvas = document.createElement('canvas')
   , ctx = canvas.getContext('2d')
   , gui = new dat.GUI
   , sliders = []
-  , radii = [
-      Math.random() * 190 + 10
-    , Math.random() * 190 + 10
-    , Math.random() * 190 + 10
-    , Math.random() * 190 + 10
-    , Math.random() * 190 + 10
-    , Math.random() * 190 + 10
-  ]
-  , options = {
-      'Slider Count': 3
-    , 'Radius #1': radii[0]
-    , 'Radius #2': radii[1]
-    , 'Radius #3': radii[2]
-    , 'Radius #4': radii[3]
-    , 'Radius #5': radii[4]
-    , 'Radius #6': radii[5]
-    , 'Size': 30 + Math.random() * 60
-    , 'Undulate': false
-  }
   , output = []
-
-document.body.appendChild(canvas)
-document.body.style.background = '#000'
-document.body.style.margin = '0'
-document.body.style.padding = '0'
-
-var width
+  , width
   , height
 
-canvas.style.margin = '0 auto'
-canvas.style.display = 'block'
+var radii = [
+    Math.random() * 190 + 10
+  , Math.random() * 190 + 10
+  , Math.random() * 190 + 10
+  , Math.random() * 190 + 10
+  , Math.random() * 190 + 10
+  , Math.random() * 190 + 10
+]
+
+var options = {
+    'Slider Count': 3
+  , 'Radius #1': radii[0]
+  , 'Radius #2': radii[1]
+  , 'Radius #3': radii[2]
+  , 'Radius #4': radii[3]
+  , 'Radius #5': radii[4]
+  , 'Radius #6': radii[5]
+  , 'Size': 30 + Math.random() * 60
+  , 'Undulate': true
+}
 
 gui.add(options, 'Size', 0, 200)
    .step(1)
    .onChange(draw)
-
 
 gui.add(options, 'Slider Count', 2, 6)
    .step(1)
    .onFinishChange(updateSliders)
 
 gui.add(options, 'Undulate')
+
+document.body.style.background = '#000'
+document.body.style.margin = '0'
+document.body.style.padding = '0'
+document.body.appendChild(canvas)
 
 function updateSliders(count) {
   sliders.forEach(function(slider, n) {
@@ -216,39 +213,7 @@ raf(canvas).on('data', function() {
   draw()
 })
 
-},{"./vendor/dat.gui.js":1,"raf":3,"./":4}],4:[function(require,module,exports){
-var cos = Math.cos
-  , sin = Math.sin
-
-module.exports = hypotrochoid
-
-function hypotrochoid(d, radii, t, output) {
-  output = output || []
-
-  var x = 0
-    , y = 0
-    , i = 0
-    , l = radii.length - 1
-    , a
-    , b
-
-  var cosT = cos(t)
-    , sinT = sin(t)
-
-  for (; i < l; i += 1) {
-    b = radii[i+1]
-    a = radii[i] - b
-    x += a * cosT + d * cos(a / b * t)
-    y += a * sinT - d * sin(a / b * t)
-  }
-
-  output[0] = x
-  output[1] = y
-
-  return output
-}
-
-},{}],3:[function(require,module,exports){
+},{"./vendor/dat.gui.js":1,"raf":3,"./":4}],3:[function(require,module,exports){
 (function(){module.exports = raf
 
 var EE = require('events').EventEmitter
@@ -298,7 +263,39 @@ raf.now = now
 
 
 })()
-},{"events":5}],6:[function(require,module,exports){
+},{"events":5}],4:[function(require,module,exports){
+var cos = Math.cos
+  , sin = Math.sin
+
+module.exports = hypotrochoid
+
+function hypotrochoid(d, radii, t, output) {
+  output = output || []
+
+  var x = 0
+    , y = 0
+    , i = 0
+    , l = radii.length - 1
+    , a
+    , b
+
+  var cosT = cos(t)
+    , sinT = sin(t)
+
+  for (; i < l; i += 1) {
+    b = radii[i+1]
+    a = radii[i] - b
+    x += a * cosT + d * cos(a / b * t)
+    y += a * sinT - d * sin(a / b * t)
+  }
+
+  output[0] = x
+  output[1] = y
+
+  return output
+}
+
+},{}],6:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
